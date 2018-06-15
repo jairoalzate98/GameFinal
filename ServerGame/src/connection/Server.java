@@ -18,10 +18,10 @@ public class Server extends Thread{
 
 	public Server() throws IOException {
 		connections = new ArrayList<>();
-		int port = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puerto"));
+		int port = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puerto", "9000"));
 		server = new ServerSocket(port);
-		start();
 		LOGGER.log(Level.INFO, "Servidor inicado en puerto: " + port);
+		start();
 	}
 
 	@Override
@@ -30,9 +30,9 @@ public class Server extends Thread{
 			Socket connection;
 			try {
 				connection = server.accept();
-				connections.add(new ThreadSocket(connection, this));
-				initGame();
+				connections.add(new ThreadSocket(connection));
 				LOGGER.log(Level.INFO, "Conexion aceptada: " + connection.getInetAddress().getHostAddress());
+				initGame();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -44,30 +44,43 @@ public class Server extends Thread{
 	}
 	
 	public void initGame() {
+		int clients = getNumberOfUser();
+		if (clients == 4) {
+			initGameCorrect();
+		} else {
+			initGameFail();
+		}
+	}
+
+	private int getNumberOfUser() {
 		int clients = 0;
-		for (ThreadSocket threadSocket : connections) {
-			if (!threadSocket.isStop()) {
+		for (ThreadSocket ts : connections) {
+			if (!ts.isStop()) {
 				clients++;
 			}
 		}
-		if (clients == 4) {
-			for (ThreadSocket threadSocket : connections) {
-				if (!threadSocket.isStop()) {
-					try {
-						threadSocket.initGame();
-					} catch (IOException e) {
-						LOGGER.log(Level.INFO, "Fallo en inicio de juego");
-					}
+		return clients;
+	}
+
+	private void initGameFail() {
+		for (ThreadSocket ts : connections) {
+			if (!ts.isStop()) {
+				try {
+					ts.failInitGame();
+				} catch (IOException e) {
+					LOGGER.log(Level.INFO, "Fallo en inicio de juego");
 				}
 			}
-		} else {
-			for (ThreadSocket threadSocket : connections) {
-				if (!threadSocket.isStop()) {
-					try {
-						threadSocket.failInitGame();
-					} catch (IOException e) {
-						LOGGER.log(Level.INFO, "Fallo en inicio de juego");
-					}
+		}
+	}
+
+	private void initGameCorrect() {
+		for (ThreadSocket ts : connections) {
+			if (!ts.isStop()) {
+				try {
+					ts.initGame();
+				} catch (IOException e) {
+					LOGGER.log(Level.INFO, "Fallo en inicio de juego");
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 package views;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import controllers.Controller;
@@ -14,11 +15,13 @@ public class MainWindow extends JFrame{
 		setTitle(TITLE_GAME);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setExtendedState(MAXIMIZED_BOTH);
+		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);
+		jDialogWaitInitGame.setVisible(true);
 	}
 	
 	public void setVisibleDialogWait() {
-		jDialogWaitInitGame.setVisible(true);
+		setSize(500, 500);
 	}
 	
 	public void setInvisibleDialogWait() {

@@ -15,11 +15,10 @@ public class Client extends Thread{
 	private DataInputStream input;
 	private DataOutputStream output;
 	private boolean stop;
-	private Controller controller;
 	public final static Logger LOGGER = Logger.getGlobal();
+	private volatile boolean game;
 	
-	public Client(String ip, int port, Controller controller) throws IOException {
-		this.controller = controller;
+	public Client(String ip, int port) throws IOException {
 		this.connection = new Socket(ip, port);
 		LOGGER.log(Level.INFO, "Conexion iniciada en el puerto -> " + port + " y en la ip -> " + ip);
 		input = new DataInputStream(connection.getInputStream());
@@ -43,12 +42,17 @@ public class Client extends Thread{
 		}
 	}
 
+	public boolean isGame() {
+		return game;
+	}
+
 	private void manageResponse(String response) {
 		if (response.equals(Request.INIT_GAME.toString())) {
-			System.out.println("Inicio de juego");
+			LOGGER.log(Level.INFO, "Inicio de juego");
+			game = true;
 		} else if(response.equals(Request.FAIL_INIT_GAME.toString())) {
-			System.out.println("Esperando inicio de juego");
-			controller.waitInitGame();
+			LOGGER.log(Level.INFO, "Esperando inicio de juego");
+			game = false;
 		}
 	}
 }

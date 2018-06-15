@@ -18,7 +18,7 @@ public class JDialogWaitInitGame extends JDialog{
 	private static final long serialVersionUID = 1L;
 
 	public JDialogWaitInitGame(MainWindow mainWindow) {
-		super(mainWindow, true);
+		super(mainWindow, false);
 		setSize(WIDTH_AND_HEIGHT, WIDTH_AND_HEIGHT);
 		setLocationRelativeTo(mainWindow);
 		getContentPane().setBackground(Color.WHITE);

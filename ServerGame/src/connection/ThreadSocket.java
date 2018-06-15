@@ -12,11 +12,9 @@ public class ThreadSocket extends Thread{
 	private DataInputStream input;
 	private DataOutputStream output;
 	private boolean stop;
-	private Server server;
 
-	public ThreadSocket(Socket socket, Server server) throws IOException {
+	public ThreadSocket(Socket socket) throws IOException {
 		this.connection = socket;
-		this.server = server;
 		input = new DataInputStream(socket.getInputStream());
 		output = new DataOutputStream(socket.getOutputStream());
 		start();
