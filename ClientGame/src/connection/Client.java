@@ -40,5 +40,10 @@ public class Client extends Thread{
 	}
 
 	private void manageResponse(String response) {
+		if (response.equals(Request.INIT_GAME.toString())) {
+			System.out.println("Inicio de juego");
+		} else if(response.equals(Request.FAIL_INIT_GAME.toString())) {
+			System.out.println("Esperando inicio de juego");
+		}
 	}
 }

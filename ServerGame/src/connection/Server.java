@@ -31,6 +31,7 @@ public class Server extends Thread{
 			try {
 				connection = server.accept();
 				connections.add(new ThreadSocket(connection, this));
+				initGame();
 				LOGGER.log(Level.INFO, "Conexion aceptada: " + connection.getInetAddress().getHostAddress());
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -40,5 +41,35 @@ public class Server extends Thread{
 
 	public ArrayList<ThreadSocket> getConnections() {
 		return connections;
+	}
+	
+	public void initGame() {
+		int clients = 0;
+		for (ThreadSocket threadSocket : connections) {
+			if (!threadSocket.isStop()) {
+				clients++;
+			}
+		}
+		if (clients == 4) {
+			for (ThreadSocket threadSocket : connections) {
+				if (!threadSocket.isStop()) {
+					try {
+						threadSocket.initGame();
+					} catch (IOException e) {
+						LOGGER.log(Level.INFO, "Fallo en inicio de juego");
+					}
+				}
+			}
+		} else {
+			for (ThreadSocket threadSocket : connections) {
+				if (!threadSocket.isStop()) {
+					try {
+						threadSocket.failInitGame();
+					} catch (IOException e) {
+						LOGGER.log(Level.INFO, "Fallo en inicio de juego");
+					}
+				}
+			}
+		}
 	}
 }

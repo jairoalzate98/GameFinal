@@ -37,7 +37,19 @@ public class ThreadSocket extends Thread{
 		}
 	}
 
+	public boolean isStop() {
+		return stop;
+	}
+
 	private void manageRequest(String request) {
 		
+	}
+	
+	public void initGame() throws IOException {
+		output.writeUTF(Request.INIT_GAME.toString());
+	}
+	
+	public void failInitGame() throws IOException {
+		output.writeUTF(Request.FAIL_INIT_GAME.toString());
 	}
 }
