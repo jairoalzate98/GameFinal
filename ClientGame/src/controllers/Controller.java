@@ -35,8 +35,6 @@ public class Controller implements ActionListener{
 		if (client.isGame()) {
 			mainWindow.setInvisibleDialogWait();
 			mainWindow.setVisible(true);
-		}else {
-			mainWindow.setVisibleDialogWait();
 		}
 	}
 

@@ -14,14 +14,11 @@ public class MainWindow extends JFrame{
 	public MainWindow(Controller controller) {
 		setTitle(TITLE_GAME);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setExtendedState(MAXIMIZED_BOTH);
+		setSize(600, 600);
+		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);
 		jDialogWaitInitGame.setVisible(true);
-	}
-	
-	public void setVisibleDialogWait() {
-		setSize(500, 500);
 	}
 	
 	public void setInvisibleDialogWait() {

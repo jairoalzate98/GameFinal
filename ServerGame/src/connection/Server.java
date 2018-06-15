@@ -9,12 +9,15 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import models.Goal;
+
 public class Server extends Thread{
 
 	private ServerSocket server;	
 	private boolean stop;
 	public final static Logger LOGGER = Logger.getGlobal();
 	private ArrayList<ThreadSocket> connections;
+	private boolean initGame;
 
 	public Server() throws IOException {
 		connections = new ArrayList<>();
@@ -22,6 +25,10 @@ public class Server extends Thread{
 		server = new ServerSocket(port);
 		LOGGER.log(Level.INFO, "Servidor inicado en puerto: " + port);
 		start();
+	}
+
+	public boolean isInitGame() {
+		return initGame;
 	}
 
 	@Override
@@ -72,6 +79,7 @@ public class Server extends Thread{
 				}
 			}
 		}
+		initGame = true;
 	}
 
 	private void initGameCorrect() {
@@ -83,6 +91,12 @@ public class Server extends Thread{
 					LOGGER.log(Level.INFO, "Fallo en inicio de juego");
 				}
 			}
+		}
+	}
+	
+	public void sendInfoGoals() throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendInfoGoals();
 		}
 	}
 }

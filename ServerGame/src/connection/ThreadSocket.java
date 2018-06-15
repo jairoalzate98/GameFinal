@@ -12,9 +12,12 @@ public class ThreadSocket extends Thread{
 	private DataInputStream input;
 	private DataOutputStream output;
 	private boolean stop;
+	private int idClient;
+	private static int count;
 
 	public ThreadSocket(Socket socket) throws IOException {
 		this.connection = socket;
+		idClient = ++count;
 		input = new DataInputStream(socket.getInputStream());
 		output = new DataOutputStream(socket.getOutputStream());
 		start();
@@ -49,5 +52,13 @@ public class ThreadSocket extends Thread{
 	
 	public void failInitGame() throws IOException {
 		output.writeUTF(Request.FAIL_INIT_GAME.toString());
+	}
+
+	public int getIdClient() {
+		return idClient;
+	}
+
+	public void sendInfoGoals() throws IOException {
+		output.writeUTF(Request.SEND_INFO_GOALS.toString());
 	}
 }

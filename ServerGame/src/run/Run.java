@@ -2,13 +2,13 @@ package run;
 
 import java.io.IOException;
 
-import connection.Server;
+import controllers.Controller;
 
 public class Run {
 
 	public static void main(String[] args) {
 		try {
-			new Server();
+			new Controller();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

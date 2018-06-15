@@ -7,8 +7,6 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import controllers.Controller;
-
 public class Client extends Thread{
 	
 	private Socket connection;
@@ -53,6 +51,8 @@ public class Client extends Thread{
 		} else if(response.equals(Request.FAIL_INIT_GAME.toString())) {
 			LOGGER.log(Level.INFO, "Esperando inicio de juego");
 			game = false;
+		} else if(response.equals(Request.SEND_INFO_GOALS.toString())) {
+			LOGGER.log(Level.INFO, "Recibido datos de porterias");
 		}
 	}
 }
