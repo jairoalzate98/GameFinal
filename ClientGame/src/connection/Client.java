@@ -8,14 +8,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Client extends Thread{
-	
+
 	private Socket connection;
 	private DataInputStream input;
 	private DataOutputStream output;
 	private boolean stop;
 	public final static Logger LOGGER = Logger.getGlobal();
 	private volatile boolean game;
-	
+	private boolean goals;
+	private String infoGoal;
+
 	public Client(String ip, int port) throws IOException {
 		this.connection = new Socket(ip, port);
 		LOGGER.log(Level.INFO, "Conexion iniciada en el puerto -> " + port + " y en la ip -> " + ip);
@@ -23,7 +25,7 @@ public class Client extends Thread{
 		output = new DataOutputStream(connection.getOutputStream());
 		start();
 	}
-	
+
 	@Override
 	public void run() {
 		while (!stop) {
@@ -44,7 +46,7 @@ public class Client extends Thread{
 		return game;
 	}
 
-	private void manageResponse(String response) {
+	private void manageResponse(String response) throws IOException {
 		if (response.equals(Request.INIT_GAME.toString())) {
 			LOGGER.log(Level.INFO, "Inicio de juego");
 			game = true;
@@ -52,7 +54,16 @@ public class Client extends Thread{
 			LOGGER.log(Level.INFO, "Esperando inicio de juego");
 			game = false;
 		} else if(response.equals(Request.SEND_INFO_GOALS.toString())) {
-			LOGGER.log(Level.INFO, "Recibido datos de porterias");
-		}
+			infoGoal = input.readUTF();
+			goals =  true;
+			LOGGER.log(Level.INFO, "Recibido datos de porterias");}
+	}
+
+	public boolean isGoals() {
+		return goals;
+	}
+
+	public String getInfoGoal() {
+		return infoGoal;
 	}
 }

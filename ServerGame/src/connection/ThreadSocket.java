@@ -4,7 +4,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
+
+import models.Goal;
 
 public class ThreadSocket extends Thread{
 	
@@ -58,7 +61,12 @@ public class ThreadSocket extends Thread{
 		return idClient;
 	}
 
-	public void sendInfoGoals() throws IOException {
+	public void sendInfoGoals(ArrayList<Goal> goalList) throws IOException {
 		output.writeUTF(Request.SEND_INFO_GOALS.toString());
+		String send = "";
+		for (Goal goal : goalList) {
+			send += goal.getPosX() + "," + goal.getPosY() + "," + goal.getIdClient() + ";";
+		}
+		output.writeUTF(send);
 	}
 }

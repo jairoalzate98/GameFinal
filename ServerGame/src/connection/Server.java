@@ -79,7 +79,6 @@ public class Server extends Thread{
 				}
 			}
 		}
-		initGame = true;
 	}
 
 	private void initGameCorrect() {
@@ -92,11 +91,12 @@ public class Server extends Thread{
 				}
 			}
 		}
+		initGame = true;
 	}
 	
-	public void sendInfoGoals() throws IOException {
+	public void sendInfoGoals(ArrayList<Goal> goalList) throws IOException {
 		for (ThreadSocket ts : connections) {
-			ts.sendInfoGoals();
+			ts.sendInfoGoals(goalList);
 		}
 	}
 }

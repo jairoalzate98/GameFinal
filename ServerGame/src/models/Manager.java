@@ -11,6 +11,7 @@ public class Manager {
 	private boolean createdGoals;
 	
 	public Manager() {
+		createdGoals = false;
 		goalList = new ArrayList<>();
 	}
 	
@@ -23,9 +24,10 @@ public class Manager {
 	}
 
 	public void initGoals(ArrayList<ThreadSocket> sockets) {
-		for (Goal goal : goalList) {
-			goalList.add(new Goal(goal.getPosX(), goal.getPosY(), goal.getIdClient()));
-		}
+		addGoal(createGoal(sockets.get(0).getIdClient(), 0, 260));
+		addGoal(createGoal(sockets.get(1).getIdClient(), 260, 0));
+		addGoal(createGoal(sockets.get(2).getIdClient(), 260, 600));
+		addGoal(createGoal(sockets.get(3).getIdClient(), 600, 260));
 		createdGoals = true;
 	}
 
