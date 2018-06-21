@@ -19,6 +19,7 @@ public class Client extends Thread{
 	private boolean players;
 	private String infoGoal;
 	private String infoPlayer;
+	private int idClient;
 
 	public Client(String ip, int port) throws IOException {
 		this.connection = new Socket(ip, port);
@@ -44,6 +45,10 @@ public class Client extends Thread{
 		}
 	}
 
+	public int getIdClient() {
+		return idClient;
+	}
+
 	public boolean isGame() {
 		return game;
 	}
@@ -63,6 +68,9 @@ public class Client extends Thread{
 			infoPlayer = input.readUTF();
 			players = true;
 			LOGGER.log(Level.INFO, "Recibido datos de jugadores");
+		} else if(response.equals(Request.SEND_ID_USER.toString())) {
+			idClient = Integer.parseInt(input.readUTF());
+			LOGGER.log(Level.INFO, "Recibido id cliente");
 		}
 	}
 

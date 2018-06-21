@@ -43,10 +43,10 @@ public class Manager {
 	}
 	
 	public void initPlayer(ArrayList<ThreadSocket> sockets) {
-		addPlayer(createPlayer(sockets.get(0).getIdClient(), 0, 260));
-		addPlayer(createPlayer(sockets.get(1).getIdClient(), 260, 0));
-		addPlayer(createPlayer(sockets.get(2).getIdClient(), 260, 600));
-		addPlayer(createPlayer(sockets.get(3).getIdClient(), 600, 260));
+		addPlayer(createPlayer(sockets.get(0).getIdClient(), 50, 260));
+		addPlayer(createPlayer(sockets.get(1).getIdClient(), 260, 50));
+		addPlayer(createPlayer(sockets.get(2).getIdClient(), 260, 550));
+		addPlayer(createPlayer(sockets.get(3).getIdClient(), 550, 260));
 		createdPlayers = true;
 	}
 

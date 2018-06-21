@@ -24,6 +24,8 @@ public class ThreadSocket extends Thread{
 		idClient = ++count;
 		input = new DataInputStream(socket.getInputStream());
 		output = new DataOutputStream(socket.getOutputStream());
+		output.writeUTF(Request.SEND_ID_USER.toString());
+		output.writeUTF(String.valueOf(idClient));
 		start();
 	}
 	

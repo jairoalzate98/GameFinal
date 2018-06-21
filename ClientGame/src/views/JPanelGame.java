@@ -17,16 +17,21 @@ public class JPanelGame extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Goal> goalList;
 	private ArrayList<Player> playerList;
-	
+	private ImageIcon goalUp = new ImageIcon(getClass().getResource("/img/goal.png"));
+	private ImageIcon goalLeft = new ImageIcon(getClass().getResource("/img/goal Left.png"));
+	private ImageIcon goalDown = new ImageIcon(getClass().getResource("/img/goal Down.png"));
+	private ImageIcon goalRight = new ImageIcon(getClass().getResource("/img/goal Right.png"));
+	private ImageIcon person = new ImageIcon(getClass().getResource("/img/persona.png"));
+
 	public JPanelGame() {
 		goalList = new ArrayList<>();
 		playerList = new ArrayList<>();
 	}
-	
+
 	public void setGoalList(ArrayList<Goal> goalList) {
 		this.goalList = goalList;
 	}
-	
+
 	public void setPlayerList(ArrayList<Player> playerList) {
 		this.playerList = playerList;
 	}
@@ -47,21 +52,34 @@ public class JPanelGame extends JPanel{
 			g.setColor(Color.WHITE);
 			g.setFont(FONT_UBUNTU);
 			if (goal.getPosX() == 0 && goal.getPosY() == 260) {
-				g.drawImage(new ImageIcon(getClass().getResource("/img/goal Left.png")).getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
+				g.drawImage(goalLeft.getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX(), goal.getPosY() + 100);
 			}else if(goal.getPosX() == 260 && goal.getPosY() == 0){
-				g.drawImage(new ImageIcon(getClass().getResource("/img/goal.png")).getImage(), goal.getPosX(), goal.getPosY(), 80, 40, this);
+				g.drawImage(goalUp.getImage(), goal.getPosX(), goal.getPosY(), 80, 40, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX() - 20, goal.getPosY() + 20);
 			}else if(goal.getPosX() == 260 && goal.getPosY() == 600){
-				g.drawImage(new ImageIcon(getClass().getResource("/img/goal Down.png")).getImage(), goal.getPosX(), goal.getPosY(), 80, 40, this);
+				g.drawImage(goalDown.getImage(), goal.getPosX(), goal.getPosY(), 80, 40, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX() + 100, goal.getPosY() + 20);
 			}else {
-				g.drawImage(new ImageIcon(getClass().getResource("/img/goal Right.png")).getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
+				g.drawImage(goalRight.getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX() + 20, goal.getPosY() - 10);
 			}
 		}
 		for (Player player : playerList) {
-			g.drawImage(new ImageIcon(getClass().getResource("/img/persona.png")).getImage(), player.getPosX(), player.getPosY(), 30, 60, this);
+			g.setColor(Color.YELLOW);
+			if (player.getPosX() == 0 && player.getPosY() == 260) {
+				g.drawImage(person.getImage(), player.getPosX(), player.getPosY(), 50, 60, this);
+				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() + 20, player.getPosY() - 10);
+			}else if(player.getPosX() == 260 && player.getPosY() == 0){
+				g.drawImage(person.getImage(), player.getPosX(), player.getPosY(), 50, 60, this);
+				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() + 20, player.getPosY() - 10);
+			}else if(player.getPosX() == 260 && player.getPosY() == 600){			
+				g.drawImage(person.getImage(), player.getPosX(), player.getPosY(), 50, 60, this);
+				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() +  20, player.getPosY() - 10);
+			}else {
+				g.drawImage(person.getImage(), player.getPosX(), player.getPosY(), 50, 60, this);
+				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() + 20, player.getPosY() - 10);
+			}
 		}
 	}
 }
