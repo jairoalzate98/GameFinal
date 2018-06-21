@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import models.Goal;
+import models.Player;
 
 public class Server extends Thread{
 
@@ -97,6 +98,12 @@ public class Server extends Thread{
 	public void sendInfoGoals(ArrayList<Goal> goalList) throws IOException {
 		for (ThreadSocket ts : connections) {
 			ts.sendInfoGoals(goalList);
+		}
+	}
+
+	public void sendInfoPlayers(ArrayList<Player> playerList) throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendInfoPlayers(playerList);
 		}
 	}
 }

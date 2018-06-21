@@ -16,7 +16,9 @@ public class Client extends Thread{
 	public final static Logger LOGGER = Logger.getGlobal();
 	private volatile boolean game;
 	private boolean goals;
+	private boolean players;
 	private String infoGoal;
+	private String infoPlayer;
 
 	public Client(String ip, int port) throws IOException {
 		this.connection = new Socket(ip, port);
@@ -56,7 +58,20 @@ public class Client extends Thread{
 		} else if(response.equals(Request.SEND_INFO_GOALS.toString())) {
 			infoGoal = input.readUTF();
 			goals =  true;
-			LOGGER.log(Level.INFO, "Recibido datos de porterias");}
+			LOGGER.log(Level.INFO, "Recibido datos de porterias");
+		} else if(response.equals(Request.SEND_INFO_PLAYERS.toString())) {
+			infoPlayer = input.readUTF();
+			players = true;
+			LOGGER.log(Level.INFO, "Recibido datos de jugadores");
+		}
+	}
+
+	public boolean isPlayers() {
+		return players;
+	}
+
+	public String getInfoPlayer() {
+		return infoPlayer;
 	}
 
 	public boolean isGoals() {

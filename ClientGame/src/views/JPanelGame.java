@@ -9,21 +9,36 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import models.Goal;
+import models.Player;
 
 public class JPanelGame extends JPanel{
 
 	public static final Font FONT_UBUNTU = new Font("Ubuntu", Font.BOLD, 18);
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Goal> goalList;
+	private ArrayList<Player> playerList;
 	
 	public JPanelGame() {
 		goalList = new ArrayList<>();
+		playerList = new ArrayList<>();
 	}
 	
 	public void setGoalList(ArrayList<Goal> goalList) {
 		this.goalList = goalList;
 	}
 	
+	public void setPlayerList(ArrayList<Player> playerList) {
+		this.playerList = playerList;
+	}
+
+	public ArrayList<Goal> getGoalList() {
+		return goalList;
+	}
+
+	public ArrayList<Player> getPlayerList() {
+		return playerList;
+	}
+
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
@@ -44,6 +59,9 @@ public class JPanelGame extends JPanel{
 				g.drawImage(new ImageIcon(getClass().getResource("/img/goal Right.png")).getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX() + 20, goal.getPosY() - 10);
 			}
+		}
+		for (Player player : playerList) {
+			g.drawImage(new ImageIcon(getClass().getResource("/img/persona.png")).getImage(), player.getPosX(), player.getPosY(), 30, 60, this);
 		}
 	}
 }

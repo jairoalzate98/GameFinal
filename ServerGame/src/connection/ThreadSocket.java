@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import models.Goal;
+import models.Player;
 
 public class ThreadSocket extends Thread{
 	
@@ -66,6 +67,15 @@ public class ThreadSocket extends Thread{
 		String send = "";
 		for (Goal goal : goalList) {
 			send += goal.getPosX() + "," + goal.getPosY() + "," + goal.getIdClient() + ";";
+		}
+		output.writeUTF(send);
+	}
+
+	public void sendInfoPlayers(ArrayList<Player> playerList) throws IOException {
+		output.writeUTF(Request.SEND_INFO_PLAYERS.toString());
+		String send = "";
+		for (Player player : playerList) {
+			send += player.getPosX() + "," + player.getPosY() + "," + player.getIdClient() + ";";
 		}
 		output.writeUTF(send);
 	}

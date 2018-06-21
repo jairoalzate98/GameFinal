@@ -37,6 +37,14 @@ public class Controller {
 					e.printStackTrace();
 				}
 			}
+			if (!manager.isCreatedPlayers()) {
+				manager.initPlayer(server.getConnections());
+				try {
+					server.sendInfoPlayers(manager.getPlayerList());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 }

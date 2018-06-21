@@ -44,7 +44,25 @@ public class Controller implements ActionListener{
 					createGoals(info);
 				}
 			}
+			if (client.isPlayers()) {
+				if (!manager.isPlayersCreated()) {
+					String info = client.getInfoPlayer();
+					createPlayers(info);
+				}
+			}
 		}
+	}
+
+	private void createPlayers(String info) {
+		String[] player = info.split(";");
+		for (String string : player) {
+			String[] pos = string.split(",");
+			manager.addPlayer(Manager.createPlayer(Integer.parseInt(pos[2]), Integer.parseInt(pos[1]), Integer.parseInt(pos[0])));
+		}
+		manager.setPlayersCreated(true);
+		mainWindow.setPlayers(manager.getPlayerList());
+		mainWindow.revalidate();
+		mainWindow.repaint();
 	}
 
 	private void createGoals(String info) {

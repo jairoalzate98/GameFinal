@@ -9,18 +9,29 @@ public class Manager {
 	public static final int SIZE_GOAL_VECTOR = 4;
 	private ArrayList<Goal> goalList;
 	private boolean createdGoals;
+	private boolean createdPlayers;
+	private ArrayList<Player> playerList;
 	
 	public Manager() {
 		createdGoals = false;
 		goalList = new ArrayList<>();
+		playerList = new ArrayList<>();
 	}
 	
 	public void addGoal(Goal g) {
 		goalList.add(g);
 	}
 	
+	public void addPlayer(Player p) {
+		playerList.add(p);
+	}
+	
 	public static Goal createGoal(int idClient, int posX, int posY) {
 		return new Goal(posX, posY, idClient);
+	}
+	
+	public static Player createPlayer(int idClient, int posX, int posY) {
+		return new Player(idClient, posX, posY);
 	}
 
 	public void initGoals(ArrayList<ThreadSocket> sockets) {
@@ -30,6 +41,18 @@ public class Manager {
 		addGoal(createGoal(sockets.get(3).getIdClient(), 600, 260));
 		createdGoals = true;
 	}
+	
+	public void initPlayer(ArrayList<ThreadSocket> sockets) {
+		addPlayer(createPlayer(sockets.get(0).getIdClient(), 0, 260));
+		addPlayer(createPlayer(sockets.get(1).getIdClient(), 260, 0));
+		addPlayer(createPlayer(sockets.get(2).getIdClient(), 260, 600));
+		addPlayer(createPlayer(sockets.get(3).getIdClient(), 600, 260));
+		createdPlayers = true;
+	}
+
+	public boolean isCreatedPlayers() {
+		return createdPlayers;
+	}
 
 	public ArrayList<Goal> getGoalList() {
 		return goalList;
@@ -37,5 +60,9 @@ public class Manager {
 
 	public boolean isCreatedGoals() {
 		return createdGoals;
+	}
+
+	public ArrayList<Player> getPlayerList() {
+		return playerList;
 	}
 }

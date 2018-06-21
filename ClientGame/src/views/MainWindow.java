@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import controllers.Controller;
 import models.Goal;
+import models.Player;
 
 public class MainWindow extends JFrame{
 
@@ -29,7 +30,13 @@ public class MainWindow extends JFrame{
 	}
 	
 	public void setGoals(ArrayList<Goal> goalList) {
+		jPanelGame.removeAll();
 		jPanelGame.setGoalList(goalList);
+	}
+	
+	public void setPlayers(ArrayList<Player> playerList) {
+		jPanelGame.removeAll();
+		jPanelGame.setPlayerList(playerList);
 	}
 	
 	public void setInvisibleDialogWait() {
