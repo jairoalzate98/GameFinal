@@ -19,7 +19,7 @@ public class MainWindow extends JFrame{
 	public MainWindow(Controller controller) {
 		setTitle(TITLE_GAME);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(600, 600);
+		setSize(660, 680);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);

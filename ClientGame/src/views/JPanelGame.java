@@ -24,6 +24,7 @@ public class JPanelGame extends JPanel{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		g.drawImage(new ImageIcon(getClass().getResource("/img/pasto.jpg")).getImage(), 0, 0, 660, 680, this);
 		for (Goal goal : goalList) {
 			if (goal.getPosX() == 0 && goal.getPosY() == 260) {
 				g.drawImage(new ImageIcon(getClass().getResource("/img/goal Left.png")).getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
