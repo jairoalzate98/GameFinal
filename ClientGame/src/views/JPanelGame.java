@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import controllers.Controller;
 import models.Goal;
 import models.Player;
 
@@ -23,9 +24,10 @@ public class JPanelGame extends JPanel{
 	private ImageIcon goalRight = new ImageIcon(getClass().getResource("/img/goal Right.png"));
 	private ImageIcon person = new ImageIcon(getClass().getResource("/img/persona.png"));
 
-	public JPanelGame() {
+	public JPanelGame(Controller controller) {
 		goalList = new ArrayList<>();
 		playerList = new ArrayList<>();
+		addKeyListener(controller);
 	}
 
 	public void setGoalList(ArrayList<Goal> goalList) {

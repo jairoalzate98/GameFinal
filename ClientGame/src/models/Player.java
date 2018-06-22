@@ -23,4 +23,33 @@ public class Player {
 	public int getPosY() {
 		return posY;
 	}
+
+	public void moveUp() {
+		if (posY > 0) {
+			posY -= 10;
+		}
+	}
+
+	public void moveDown() {
+		if (posY < 600) {
+			posY += 10;
+		}
+	}
+
+	public void moveRight() {
+		if (posX < 600) {
+			posX += 10;
+		}
+	}
+
+	public void moveLeft() {
+		if (posX > 0) {
+			posX -= 10;
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Player [idClient=" + idClient + ", posX=" + posX + ", posY=" + posY + "]";
+	}
 }

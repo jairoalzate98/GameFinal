@@ -25,7 +25,8 @@ public class MainWindow extends JFrame{
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);
 		jDialogWaitInitGame.setVisible(true);
-		jPanelGame = new JPanelGame();
+		jPanelGame = new JPanelGame(controller);
+		jPanelGame.setFocusable(true);
 		add(jPanelGame, BorderLayout.CENTER);
 	}
 	

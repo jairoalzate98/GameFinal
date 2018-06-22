@@ -53,4 +53,36 @@ public class Manager {
 	public ArrayList<Player> getPlayerList() {
 		return playerList;
 	}
+
+	public void moveUp(int idClient) {
+		for (Player player : playerList) {
+			if (player.getIdClient() == idClient) {
+				player.moveUp();
+			}
+		}
+	}
+
+	public void moveDown(int idClient) {
+		for (Player player : playerList) {
+			if (player.getIdClient() == idClient) {
+				player.moveDown();
+			}
+		}
+	}
+
+	public void moveRight(int idClient) {
+		for (Player player : playerList) {
+			if (player.getIdClient() == idClient) {
+				player.moveRight();
+			}
+		}
+	}
+
+	public void moveLeft(int idClient) {
+		for (Player player : playerList) {
+			if (player.getIdClient() == idClient) {
+				player.moveLeft();
+			}
+		}
+	}
 }
