@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import models.Goal;
+import models.Manager;
 import models.Player;
 
 public class Server extends Thread{
@@ -19,8 +20,10 @@ public class Server extends Thread{
 	public final static Logger LOGGER = Logger.getGlobal();
 	private ArrayList<ThreadSocket> connections;
 	private boolean initGame;
+	private Manager manager;
 
-	public Server() throws IOException {
+	public Server(Manager manager) throws IOException {
+		this.manager = manager;
 		connections = new ArrayList<>();
 		int port = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puerto", "9000"));
 		server = new ServerSocket(port);
@@ -38,7 +41,7 @@ public class Server extends Thread{
 			Socket connection;
 			try {
 				connection = server.accept();
-				connections.add(new ThreadSocket(connection));
+				connections.add(new ThreadSocket(connection, manager));
 				LOGGER.log(Level.INFO, "Conexion aceptada: " + connection.getInetAddress().getHostAddress());
 				initGame();
 			} catch (IOException e) {
@@ -104,6 +107,26 @@ public class Server extends Thread{
 	public void sendInfoPlayers(ArrayList<Player> playerList) throws IOException {
 		for (ThreadSocket ts : connections) {
 			ts.sendInfoPlayers(playerList);
+		}
+	}
+	
+	public void sendPetitionGetInfoPlayer() throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendPetitionGetInfoPlayer();
+		}
+	}
+
+	public ArrayList<String> getPosition() {
+		ArrayList<String> info = new ArrayList<>();
+		for (ThreadSocket ts : connections) {
+			info.add(ts.getInfo());
+		}
+		return info;
+	}
+
+	public void refreshPlayers(ArrayList<Player> playerList) throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.refreshPlayers(playerList);
 		}
 	}
 }

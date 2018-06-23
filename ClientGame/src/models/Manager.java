@@ -54,34 +54,69 @@ public class Manager {
 		return playerList;
 	}
 
-	public void moveUp(int idClient) {
+	public Player moveUp(int idClient) {
+		Player p = null;
 		for (Player player : playerList) {
 			if (player.getIdClient() == idClient) {
 				player.moveUp();
+				p = player;
 			}
 		}
+		return p;
 	}
 
-	public void moveDown(int idClient) {
+	public Player moveDown(int idClient) {
+		Player p = null;
 		for (Player player : playerList) {
 			if (player.getIdClient() == idClient) {
 				player.moveDown();
+				p = player;
 			}
 		}
+		return p;
 	}
 
-	public void moveRight(int idClient) {
+	public Player moveRight(int idClient) {
+		Player p = null;
 		for (Player player : playerList) {
 			if (player.getIdClient() == idClient) {
 				player.moveRight();
+				p = player;
 			}
 		}
+		return p;
 	}
 
-	public void moveLeft(int idClient) {
+	public Player moveLeft(int idClient) {
+		Player p = null;
 		for (Player player : playerList) {
 			if (player.getIdClient() == idClient) {
 				player.moveLeft();
+				p = player;
+			}
+		}
+		return p;
+	}
+
+	public Player getPlaterById(int idClient) {
+		Player p = null;
+		for (Player player: playerList) {
+			if (player.getIdClient() == idClient) {
+				p = player;
+			}
+		}
+		return p;
+	}
+
+	public void setPositions(String info) {
+		String [] in = info.split(";");
+		for (String string : in) {
+			String[] information = string.split(",");
+			for (Player player : playerList) {
+				if (player.getIdClient() == Integer.parseInt(information[0])) {
+					player.setPosX(Integer.parseInt(information[1]));
+					player.setPosY(Integer.parseInt(information[2]));
+				}
 			}
 		}
 	}

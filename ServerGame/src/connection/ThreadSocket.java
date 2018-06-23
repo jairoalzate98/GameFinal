@@ -8,19 +8,23 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import models.Goal;
+import models.Manager;
 import models.Player;
 
 public class ThreadSocket extends Thread{
-	
+
 	private Socket connection;
 	private DataInputStream input;
 	private DataOutputStream output;
 	private boolean stop;
 	private int idClient;
 	private static int count;
+	private String info;
+	private Manager manager; 
 
-	public ThreadSocket(Socket socket) throws IOException {
+	public ThreadSocket(Socket socket, Manager manager) throws IOException {
 		this.connection = socket;
+		this.manager = manager;
 		idClient = ++count;
 		input = new DataInputStream(socket.getInputStream());
 		output = new DataOutputStream(socket.getOutputStream());
@@ -28,7 +32,7 @@ public class ThreadSocket extends Thread{
 		output.writeUTF(String.valueOf(idClient));
 		start();
 	}
-	
+
 	@Override
 	public void run() {
 		while (!stop) {
@@ -44,18 +48,30 @@ public class ThreadSocket extends Thread{
 		}
 	}
 
+	private void manageRequest(String request) throws IOException {
+		if (request.equals(Request.SEND_INFO.toString())) {
+			info = input.readUTF();
+			try {
+				if (!info.isEmpty()) {
+					manager.setPositions(info);
+				}
+			}catch (Exception e) {
+			}
+		}
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
 	public boolean isStop() {
 		return stop;
 	}
 
-	private void manageRequest(String request) {
-		
-	}
-	
 	public void initGame() throws IOException {
 		output.writeUTF(Request.INIT_GAME.toString());
 	}
-	
+
 	public void failInitGame() throws IOException {
 		output.writeUTF(Request.FAIL_INIT_GAME.toString());
 	}
@@ -78,6 +94,19 @@ public class ThreadSocket extends Thread{
 		String send = "";
 		for (Player player : playerList) {
 			send += player.getPosX() + "," + player.getPosY() + "," + player.getIdClient() + ";";
+		}
+		output.writeUTF(send);
+	}
+
+	public void sendPetitionGetInfoPlayer() throws IOException {
+		output.writeUTF(Request.RECIBE_INFO_PLAYER.toString());
+	}
+
+	public void refreshPlayers(ArrayList<Player> playerList) throws IOException {
+		output.writeUTF(Request.REFRESH_PLAYERS.toString());
+		String send = "";
+		for (Player player : playerList) {
+			send += player.getIdClient() + "," + player.getPosX() + "," + player.getPosY() + ";";
 		}
 		output.writeUTF(send);
 	}

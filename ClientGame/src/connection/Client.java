@@ -7,6 +7,9 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import models.Manager;
+import models.Player;
+
 public class Client extends Thread{
 
 	private Socket connection;
@@ -20,8 +23,10 @@ public class Client extends Thread{
 	private String infoGoal;
 	private String infoPlayer;
 	private int idClient;
+	private Manager manager;
 
-	public Client(String ip, int port) throws IOException {
+	public Client(String ip, int port, Manager manager) throws IOException {
+		this.manager = manager;
 		this.connection = new Socket(ip, port);
 		LOGGER.log(Level.INFO, "Conexion iniciada en el puerto -> " + port + " y en la ip -> " + ip);
 		input = new DataInputStream(connection.getInputStream());
@@ -71,6 +76,21 @@ public class Client extends Thread{
 		} else if(response.equals(Request.SEND_ID_USER.toString())) {
 			idClient = Integer.parseInt(input.readUTF());
 			LOGGER.log(Level.INFO, "Recibido id cliente");
+		} else if(response.equals(Request.RECIBE_INFO_PLAYER.toString())) {
+			output.writeUTF(Request.SEND_INFO.toString());
+			sendInfoPlayer();
+		} else if(response.equals(Request.REFRESH_PLAYERS.toString())) {
+			String info = input.readUTF();
+			manager.setPositions(info);
+		}
+	}
+
+	private void sendInfoPlayer() throws IOException {
+		Player p = manager.getPlaterById(idClient);
+		try {
+			String send = p.getIdClient() + "," + p.getPosX() + "," + p.getPosY();
+			output.writeUTF(send);
+		}catch (Exception e) {
 		}
 	}
 

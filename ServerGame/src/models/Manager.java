@@ -11,25 +11,29 @@ public class Manager {
 	private boolean createdGoals;
 	private boolean createdPlayers;
 	private ArrayList<Player> playerList;
-	
+
 	public Manager() {
 		createdGoals = false;
 		goalList = new ArrayList<>();
 		playerList = new ArrayList<>();
 	}
-	
+
+	public void setPlayerList(ArrayList<Player> playerList) {
+		this.playerList = playerList;
+	}
+
 	public void addGoal(Goal g) {
 		goalList.add(g);
 	}
-	
+
 	public void addPlayer(Player p) {
 		playerList.add(p);
 	}
-	
+
 	public static Goal createGoal(int idClient, int posX, int posY) {
 		return new Goal(posX, posY, idClient);
 	}
-	
+
 	public static Player createPlayer(int idClient, int posX, int posY) {
 		return new Player(idClient, posX, posY);
 	}
@@ -41,7 +45,7 @@ public class Manager {
 		addGoal(createGoal(sockets.get(3).getIdClient(), 600, 260));
 		createdGoals = true;
 	}
-	
+
 	public void initPlayer(ArrayList<ThreadSocket> sockets) {
 		addPlayer(createPlayer(sockets.get(0).getIdClient(), 50, 260));
 		addPlayer(createPlayer(sockets.get(1).getIdClient(), 260, 50));
@@ -64,5 +68,15 @@ public class Manager {
 
 	public ArrayList<Player> getPlayerList() {
 		return playerList;
+	}
+
+	public void setPositions(String info) {
+		String[] information = info.split(",");
+		for (Player player : playerList) {
+			if (player.getIdClient() == Integer.parseInt(information[0])) {
+				player.setPosX(Integer.parseInt(information[1]));
+				player.setPosY(Integer.parseInt(information[2]));
+			}
+		}
 	}
 }

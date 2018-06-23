@@ -3,6 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.logging.Level;
 
 import javax.swing.Timer;
 
@@ -16,15 +17,25 @@ public class Controller {
 	private Timer timer;
 
 	public Controller() throws IOException {
-		server = new Server();
 		manager = new Manager();
-		timer = new Timer(1000, new ActionListener() {
+		server = new Server(manager);
+		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				verifyInitGame();
+				sendPetitionGetInfoPlayers();
 			}
 		});
 		timer.start();
+	}
+
+	private void sendPetitionGetInfoPlayers() {
+		try {
+			server.sendPetitionGetInfoPlayer();
+			server.refreshPlayers(manager.getPlayerList());
+		} catch (IOException e) {
+			Server.LOGGER.log(Level.INFO, "Datos erroneos");
+		}
 	}
 
 	private void verifyInitGame() {

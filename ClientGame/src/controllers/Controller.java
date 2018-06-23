@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import connection.Client;
 import models.Manager;
+import models.Player;
 import views.MainWindow;
 
 public class Controller implements ActionListener, KeyListener{
@@ -25,8 +26,8 @@ public class Controller implements ActionListener, KeyListener{
 		int port = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el puerto", "9000"));
 		manager = new Manager();
 		mainWindow = new MainWindow(this);
-		client = new Client(ip, port);
-		timer = new Timer(10, new ActionListener() {
+		client = new Client(ip, port, manager);
+		timer = new Timer(5, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				verifyGame();
@@ -62,7 +63,11 @@ public class Controller implements ActionListener, KeyListener{
 		String[] player = info.split(";");
 		for (String string : player) {
 			String[] pos = string.split(",");
-			manager.addPlayer(Manager.createPlayer(Integer.parseInt(pos[2]), Integer.parseInt(pos[1]), Integer.parseInt(pos[0])));
+			try {
+				manager.addPlayer(Manager.createPlayer(Integer.parseInt(pos[2]), Integer.parseInt(pos[1]), Integer.parseInt(pos[0])));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
 		manager.setPlayersCreated(true);
 		mainWindow.setPlayers(manager.getPlayerList());
@@ -126,5 +131,9 @@ public class Controller implements ActionListener, KeyListener{
 		}else if(KeyEvent.VK_LEFT == e.getKeyCode()){
 			manager.moveLeft(client.getIdClient());
 		}
+	}
+	
+	public Player getPlayerById(int id) {
+		return manager.getPlaterById(id);
 	}
 }
