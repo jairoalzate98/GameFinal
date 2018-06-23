@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import controllers.Controller;
+import models.Ball;
 import models.Goal;
 import models.Player;
 
@@ -18,6 +19,7 @@ public class JPanelGame extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Goal> goalList;
 	private ArrayList<Player> playerList;
+	private Ball ball;
 	private ImageIcon goalUp = new ImageIcon(getClass().getResource("/img/goal.png"));
 	private ImageIcon goalLeft = new ImageIcon(getClass().getResource("/img/goal Left.png"));
 	private ImageIcon goalDown = new ImageIcon(getClass().getResource("/img/goal Down.png"));
@@ -44,6 +46,14 @@ public class JPanelGame extends JPanel{
 
 	public ArrayList<Player> getPlayerList() {
 		return playerList;
+	}
+
+	public Ball getBall() {
+		return ball;
+	}
+
+	public void setBall(Ball ball) {
+		this.ball = ball;
 	}
 
 	@Override
@@ -82,6 +92,10 @@ public class JPanelGame extends JPanel{
 				g.drawImage(person.getImage(), player.getPosX(), player.getPosY(), 50, 60, this);
 				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() + 20, player.getPosY() - 10);
 			}
+		}
+		try {
+			g.drawImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage(), ball.getPosX(), ball.getPosY(), 30, 30, this);
+		}catch (Exception e) {
 		}
 	}
 }

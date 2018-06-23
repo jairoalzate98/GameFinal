@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
+import models.Ball;
 import models.Goal;
 import models.Manager;
 import models.Player;
@@ -108,6 +109,12 @@ public class ThreadSocket extends Thread{
 		for (Player player : playerList) {
 			send += player.getIdClient() + "," + player.getPosX() + "," + player.getPosY() + ";";
 		}
+		output.writeUTF(send);
+	}
+
+	public void sendInfoBall(Ball ball) throws IOException {
+		output.writeUTF(Request.SEND_INFO_BALL.toString());
+		String send = ball.getPosX() + "," + ball.getPosY();
 		output.writeUTF(send);
 	}
 }

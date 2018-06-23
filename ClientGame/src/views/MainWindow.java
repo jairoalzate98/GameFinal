@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import controllers.Controller;
+import models.Ball;
 import models.Goal;
 import models.Player;
 
@@ -42,5 +43,9 @@ public class MainWindow extends JFrame{
 	
 	public void setInvisibleDialogWait() {
 		jDialogWaitInitGame.setVisible(false);
+	}
+	
+	public void setBall(Ball ball) {
+		jPanelGame.setBall(ball);
 	}
 }

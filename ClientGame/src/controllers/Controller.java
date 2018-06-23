@@ -32,6 +32,7 @@ public class Controller implements ActionListener, KeyListener{
 			public void actionPerformed(ActionEvent e) {
 				verifyGame();
 				mainWindow.setPlayers(manager.getPlayerList());
+				mainWindow.setBall(manager.getBall());
 				mainWindow.revalidate();
 				mainWindow.repaint();
 			}

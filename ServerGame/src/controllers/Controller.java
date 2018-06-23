@@ -24,9 +24,18 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				verifyInitGame();
 				sendPetitionGetInfoPlayers();
+				sendInfoBall();
 			}
 		});
 		timer.start();
+	}
+
+	public void sendInfoBall() {
+		try {
+			server.sendInfoBall(manager.getBall());
+		} catch (IOException e) {
+//			Server.LOGGER.log(Level.INFO, "Envio de balon fallido");
+		}
 	}
 
 	private void sendPetitionGetInfoPlayers() {

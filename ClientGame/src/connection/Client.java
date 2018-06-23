@@ -82,6 +82,10 @@ public class Client extends Thread{
 		} else if(response.equals(Request.REFRESH_PLAYERS.toString())) {
 			String info = input.readUTF();
 			manager.setPositions(info);
+		}else if(response.equals(Request.SEND_INFO_BALL.toString())) {
+			String info = input.readUTF();
+			manager.setBall(info);
+			LOGGER.log(Level.INFO, "Informacion balon recibida");
 		}
 	}
 

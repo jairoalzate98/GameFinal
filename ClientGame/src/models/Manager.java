@@ -8,10 +8,12 @@ public class Manager {
 	private ArrayList<Player> playerList;
 	private boolean goalsCreated;
 	private boolean playersCreated;
+	private Ball ball;
 	
 	public Manager() {
 		playerList = new ArrayList<>();
 		goalList = new ArrayList<>();
+		ball = new Ball(0, 0);
 	}
 
 	public ArrayList<Goal> getGoalList() {
@@ -119,5 +121,14 @@ public class Manager {
 				}
 			}
 		}
+	}
+
+	public Ball getBall() {
+		return ball;
+	}
+
+	public void setBall(String info) {
+		ball.setPosX(Integer.parseInt(info.split(",")[0]));
+		ball.setPosY(Integer.parseInt(info.split(",")[1]));
 	}
 }

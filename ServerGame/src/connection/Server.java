@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import models.Ball;
 import models.Goal;
 import models.Manager;
 import models.Player;
@@ -127,6 +128,12 @@ public class Server extends Thread{
 	public void refreshPlayers(ArrayList<Player> playerList) throws IOException {
 		for (ThreadSocket ts : connections) {
 			ts.refreshPlayers(playerList);
+		}
+	}
+
+	public void sendInfoBall(Ball ball) throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendInfoBall(ball);
 		}
 	}
 }
