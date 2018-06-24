@@ -29,6 +29,7 @@ public class JPanelGame extends JPanel{
 	private ImageIcon ballImage = new ImageIcon(getClass().getResource("/img/ball.png"));
 
 	public JPanelGame(Controller controller) {
+		setBackground(Color.WHITE);
 		goalList = new ArrayList<>();
 		playerList = new ArrayList<>();
 		addKeyListener(controller);

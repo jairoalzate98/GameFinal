@@ -122,7 +122,7 @@ public class ThreadSocket extends Thread{
 		output.writeUTF(Request.SEND_INFO_POINTS.toString());
 		String send = "";
 		for (Goal goal : goalList) {
-			send += goal.getIdClient() + "," + goal.getGoals();
+			send += goal.getIdClient() + "," + goal.getGoals() + ";";
 		}
 		output.writeUTF(send);
 	}

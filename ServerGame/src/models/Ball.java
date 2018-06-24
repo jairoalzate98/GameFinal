@@ -76,8 +76,8 @@ public class Ball implements Runnable{
 			Rectangle goalRectangle = new Rectangle(goal.getPosX(), goal.getPosY(), 50, 60);
 			if (ball.intersects(goalRectangle)) {
 				goal.setGoals(goal.getGoals() + 1);
-				setPosX(300);
-				setPosX(300);
+				setPosX(30);
+				setPosY(30);
 			}
 		}
 	}

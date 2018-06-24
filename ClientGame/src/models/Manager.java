@@ -133,11 +133,14 @@ public class Manager {
 	}
 
 	public void setPoints(String info) {
-		String[] points = info.split(",");
-		for (Goal goal : goalList) {
-			if (goal.getIdClient() == Integer.parseInt(points[0])) {
-				goal.setGoals(Integer.parseInt(points[1]));
-			}
+		String[] goals = info.split(";");
+		for (String string : goals) {
+			String[] points = string.split(",");
+			for (Goal goal : goalList) {
+				if (goal.getIdClient() == Integer.parseInt(points[0])) {
+					goal.setGoals(Integer.parseInt(points[1]));
+				}
+		}
 		}
 	}
 }
