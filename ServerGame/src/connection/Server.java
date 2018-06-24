@@ -136,4 +136,10 @@ public class Server extends Thread{
 			ts.sendInfoBall(ball);
 		}
 	}
+
+	public void sendInfoPoints(ArrayList<Goal> goalList) throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendInfoPoints(goalList);
+		}
+	}
 }

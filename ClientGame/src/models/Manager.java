@@ -131,4 +131,13 @@ public class Manager {
 		ball.setPosX(Float.parseFloat(info.split(",")[0]));
 		ball.setPosY(Float.parseFloat(info.split(",")[1]));
 	}
+
+	public void setPoints(String info) {
+		String[] points = info.split(",");
+		for (Goal goal : goalList) {
+			if (goal.getIdClient() == Integer.parseInt(points[0])) {
+				goal.setGoals(Integer.parseInt(points[1]));
+			}
+		}
+	}
 }

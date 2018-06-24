@@ -25,6 +25,8 @@ public class JPanelGame extends JPanel{
 	private ImageIcon goalDown = new ImageIcon(getClass().getResource("/img/goal Down.png"));
 	private ImageIcon goalRight = new ImageIcon(getClass().getResource("/img/goal Right.png"));
 	private ImageIcon person = new ImageIcon(getClass().getResource("/img/persona.png"));
+	private ImageIcon image = new ImageIcon(getClass().getResource("/img/pasto.jpg"));
+	private ImageIcon ballImage = new ImageIcon(getClass().getResource("/img/ball.png"));
 
 	public JPanelGame(Controller controller) {
 		goalList = new ArrayList<>();
@@ -59,7 +61,7 @@ public class JPanelGame extends JPanel{
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.drawImage(new ImageIcon(getClass().getResource("/img/pasto.jpg")).getImage(), 0, 0, 660, 680, this);
+		g.drawImage(image.getImage(), 0, 0, 660, 680, this);
 		for (Goal goal : goalList) {
 			g.setColor(Color.WHITE);
 			g.setFont(FONT_UBUNTU);
@@ -94,7 +96,7 @@ public class JPanelGame extends JPanel{
 			}
 		}
 		try {
-			g.drawImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage(),(int) ball.getPosX(),(int) ball.getPosY(), 30, 30, this);
+			g.drawImage(ballImage.getImage(),(int) ball.getPosX(),(int) ball.getPosY(), 30, 30, this);
 		}catch (Exception e) {
 		}
 	}

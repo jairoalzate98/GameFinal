@@ -117,4 +117,13 @@ public class ThreadSocket extends Thread{
 		String send = ball.getPosX() + "," + ball.getPosY();
 		output.writeUTF(send);
 	}
+
+	public void sendInfoPoints(ArrayList<Goal> goalList) throws IOException {
+		output.writeUTF(Request.SEND_INFO_POINTS.toString());
+		String send = "";
+		for (Goal goal : goalList) {
+			send += goal.getIdClient() + "," + goal.getGoals();
+		}
+		output.writeUTF(send);
+	}
 }

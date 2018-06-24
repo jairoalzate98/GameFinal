@@ -17,7 +17,7 @@ public class Manager {
 		createdGoals = false;
 		goalList = new ArrayList<>();
 		playerList = new ArrayList<>();
-		ball = new Ball(300, 300);
+		ball = new Ball(300, 300, this);
 	}
 
 	public void setPlayerList(ArrayList<Player> playerList) {

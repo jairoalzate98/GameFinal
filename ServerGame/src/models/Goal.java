@@ -5,6 +5,7 @@ public class Goal {
 	private int posX;
 	private int posY;
 	private int idClient;
+	private int goals;
 	
 	public Goal(int posX, int posY, int idClient) {
 		this.posX = posX;
@@ -14,6 +15,14 @@ public class Goal {
 
 	public int getPosX() {
 		return posX;
+	}
+
+	public int getGoals() {
+		return goals;
+	}
+
+	public void setGoals(int goals) {
+		this.goals = goals;
 	}
 
 	public int getPosY() {

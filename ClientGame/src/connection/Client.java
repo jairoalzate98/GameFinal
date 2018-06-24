@@ -86,6 +86,10 @@ public class Client extends Thread{
 			String info = input.readUTF();
 			manager.setBall(info);
 			LOGGER.log(Level.INFO, "Informacion balon recibida");
+		}else if (response.equals(Request.SEND_INFO_POINTS.toString())) {
+			String info = input.readUTF();
+			manager.setPoints(info);
+			LOGGER.log(Level.INFO, "Informacion goles recibida");
 		}
 	}
 

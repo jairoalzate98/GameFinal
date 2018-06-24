@@ -25,16 +25,25 @@ public class Controller {
 				verifyInitGame();
 				sendPetitionGetInfoPlayers();
 				sendInfoBall();
+				sendInfoGoals();
 			}
 		});
 		timer.start();
+	}
+
+	public void sendInfoGoals() {
+		try {
+			server.sendInfoPoints(manager.getGoalList());
+		} catch (IOException e) {
+			Server.LOGGER.log(Level.INFO, "Error envio goles marcados");
+		}
 	}
 
 	public void sendInfoBall() {
 		try {
 			server.sendInfoBall(manager.getBall());
 		} catch (IOException e) {
-//			Server.LOGGER.log(Level.INFO, "Envio de balon fallido");
+			Server.LOGGER.log(Level.INFO, "Envio de balon fallido");
 		}
 	}
 
