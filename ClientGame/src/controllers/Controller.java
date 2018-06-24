@@ -27,7 +27,7 @@ public class Controller implements ActionListener, KeyListener{
 		manager = new Manager();
 		mainWindow = new MainWindow(this);
 		client = new Client(ip, port, manager);
-		timer = new Timer(5, new ActionListener() {
+		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				verifyGame();

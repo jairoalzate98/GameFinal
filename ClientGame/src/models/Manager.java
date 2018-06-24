@@ -128,7 +128,7 @@ public class Manager {
 	}
 
 	public void setBall(String info) {
-		ball.setPosX(Integer.parseInt(info.split(",")[0]));
-		ball.setPosY(Integer.parseInt(info.split(",")[1]));
+		ball.setPosX(Float.parseFloat(info.split(",")[0]));
+		ball.setPosY(Float.parseFloat(info.split(",")[1]));
 	}
 }

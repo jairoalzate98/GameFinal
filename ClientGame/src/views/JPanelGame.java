@@ -94,7 +94,7 @@ public class JPanelGame extends JPanel{
 			}
 		}
 		try {
-			g.drawImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage(), ball.getPosX(), ball.getPosY(), 30, 30, this);
+			g.drawImage(new ImageIcon(getClass().getResource("/img/ball.png")).getImage(),(int) ball.getPosX(),(int) ball.getPosY(), 30, 30, this);
 		}catch (Exception e) {
 		}
 	}
