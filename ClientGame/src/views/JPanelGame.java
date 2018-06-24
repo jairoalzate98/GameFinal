@@ -95,6 +95,13 @@ public class JPanelGame extends JPanel{
 				g.drawString(String.valueOf(player.getIdClient()), player.getPosX() + 20, player.getPosY() - 10);
 			}
 		}
+		g.setColor(Color.BLACK);
+		int posY = 100;
+		for (Goal goal : goalList) {
+			g.drawString(String.valueOf(goal.getIdClient()), 700, posY);
+			g.drawString(String.valueOf(goal.getGoals()), 800, posY);
+			posY += 100;
+		}
 		try {
 			g.drawImage(ballImage.getImage(),(int) ball.getPosX(),(int) ball.getPosY(), 30, 30, this);
 		}catch (Exception e) {

@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -20,8 +21,9 @@ public class MainWindow extends JFrame{
 
 	public MainWindow(Controller controller) {
 		setTitle(TITLE_GAME);
+		setBackground(Color.WHITE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(660, 680);
+		setSize(1060, 680);
 		setLocationRelativeTo(null);
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);
