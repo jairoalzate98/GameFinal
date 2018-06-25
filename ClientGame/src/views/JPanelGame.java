@@ -16,6 +16,7 @@ import models.Player;
 public class JPanelGame extends JPanel{
 
 	public static final Font FONT_UBUNTU = new Font("Ubuntu", Font.BOLD, 18);
+	public static final Font FONT_LUCIDA = new Font("Lucida Sans Unicode", Font.BOLD, 18);
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Goal> goalList;
 	private ArrayList<Player> playerList;
@@ -65,7 +66,7 @@ public class JPanelGame extends JPanel{
 		g.drawImage(image.getImage(), 0, 0, 660, 680, this);
 		for (Goal goal : goalList) {
 			g.setColor(Color.WHITE);
-			g.setFont(FONT_UBUNTU);
+			g.setFont(FONT_LUCIDA);
 			if (goal.getPosX() == 0 && goal.getPosY() == 260) {
 				g.drawImage(goalLeft.getImage(), goal.getPosX(), goal.getPosY(), 40, 80, this);
 				g.drawString(String.valueOf(goal.getIdClient()), goal.getPosX(), goal.getPosY() + 100);
@@ -98,9 +99,11 @@ public class JPanelGame extends JPanel{
 		}
 		g.setColor(Color.BLACK);
 		int posY = 100;
+		g.drawString("Jugador", 700, 40);
+		g.drawString("Goles Recibidos", 800, 40);
 		for (Goal goal : goalList) {
-			g.drawString(String.valueOf(goal.getIdClient()), 700, posY);
-			g.drawString(String.valueOf(goal.getGoals()), 800, posY);
+			g.drawString(String.valueOf(goal.getIdClient()), 750, posY);
+			g.drawString(String.valueOf(goal.getGoals()), 900, posY);
 			posY += 100;
 		}
 		try {
