@@ -28,6 +28,7 @@ public class JPanelGame extends JPanel{
 	private ImageIcon person = new ImageIcon(getClass().getResource("/img/persona.png"));
 	private ImageIcon image = new ImageIcon(getClass().getResource("/img/pasto.jpg"));
 	private ImageIcon ballImage = new ImageIcon(getClass().getResource("/img/ball.png"));
+	private int seconds;
 
 	public JPanelGame(Controller controller) {
 		setBackground(Color.WHITE);
@@ -38,6 +39,10 @@ public class JPanelGame extends JPanel{
 
 	public void setGoalList(ArrayList<Goal> goalList) {
 		this.goalList = goalList;
+	}
+
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
 	}
 
 	public void setPlayerList(ArrayList<Player> playerList) {
@@ -106,6 +111,7 @@ public class JPanelGame extends JPanel{
 			g.drawString(String.valueOf(goal.getGoals()), 900, posY);
 			posY += 100;
 		}
+		g.drawString(String.valueOf(seconds) + " segundos restantes", 800, 600);
 		try {
 			g.drawImage(ballImage.getImage(),(int) ball.getPosX(),(int) ball.getPosY(), 30, 30, this);
 		}catch (Exception e) {

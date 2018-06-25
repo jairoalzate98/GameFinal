@@ -24,6 +24,7 @@ public class Client extends Thread{
 	private String infoPlayer;
 	private int idClient;
 	private Manager manager;
+	private int seconds;
 
 	public Client(String ip, int port, Manager manager) throws IOException {
 		this.manager = manager;
@@ -90,6 +91,9 @@ public class Client extends Thread{
 			String info = input.readUTF();
 			manager.setPoints(info);
 			LOGGER.log(Level.INFO, "Informacion goles recibida");
+		}else if(response.equals(Request.SEND_SECONDS.toString())) {
+			seconds = Integer.parseInt(input.readUTF());
+			LOGGER.log(Level.INFO, "Informacion segundos recibida");
 		}
 	}
 
@@ -104,6 +108,10 @@ public class Client extends Thread{
 
 	public boolean isPlayers() {
 		return players;
+	}
+
+	public int getSeconds() {
+		return seconds;
 	}
 
 	public String getInfoPlayer() {

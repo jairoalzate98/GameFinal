@@ -15,10 +15,13 @@ public class Controller {
 	private Server server;
 	private Manager manager;
 	private Timer timer;
+	private Timer time;
+	private int seconds;
 
 	public Controller() throws IOException {
 		manager = new Manager();
 		server = new Server(manager);
+		seconds = 120;
 		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -29,6 +32,24 @@ public class Controller {
 			}
 		});
 		timer.start();
+		time = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (server.isInitGame()) {
+					seconds--;
+					sendSeconds();
+				}
+			}
+		});
+		time.start();
+	}
+
+	public void sendSeconds() {
+		try {
+			server.sendSeconds(seconds);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void sendInfoGoals() {

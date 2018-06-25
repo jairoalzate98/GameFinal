@@ -142,4 +142,10 @@ public class Server extends Thread{
 			ts.sendInfoPoints(goalList);
 		}
 	}
+
+	public void sendSeconds(int seconds) throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendSeconds(seconds);
+		}
+	}
 }

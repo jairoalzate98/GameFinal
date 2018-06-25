@@ -126,4 +126,9 @@ public class ThreadSocket extends Thread{
 		}
 		output.writeUTF(send);
 	}
+
+	public void sendSeconds(int seconds) throws IOException {
+		output.writeUTF(Request.SEND_SECONDS.toString());
+		output.writeUTF(String.valueOf(seconds));
+	}
 }

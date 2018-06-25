@@ -50,4 +50,8 @@ public class MainWindow extends JFrame{
 	public void setBall(Ball ball) {
 		jPanelGame.setBall(ball);
 	}
+	
+	public void setSeconds(int seconds) {
+		jPanelGame.setSeconds(seconds);
+	}
 }
