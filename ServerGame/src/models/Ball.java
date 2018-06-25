@@ -14,7 +14,7 @@ public class Ball implements Runnable{
 	private float posX = ballRadius + 10; 
 	private float posY = ballRadius + 50; 
 	private float ballSpeedX = 3;  
-	private float ballSpeedY = 2;
+	private float ballSpeedY = 3;
 	private Manager manager;
 
 	public Ball(int posX, int posY, Manager manager) {
@@ -35,13 +35,13 @@ public class Ball implements Runnable{
 					posX = p.getPosX() - ballRadius; 
 				} else if (posX + ballRadius > p.getPosX() + 50) {
 					ballSpeedX = -ballSpeedX;
-					posX = p.getPosX() + 50 - ballRadius;
+					posX = p.getPosX() + 50 + ballRadius;
 				}else if (posY - ballRadius < p.getPosY()) {
 					ballSpeedY = -ballSpeedY;
 					posY = p.getPosY() - ballRadius;
 				} else if (posY + ballRadius > p.getPosY() + 60) {
 					ballSpeedY = -ballSpeedY;
-					posY = p.getPosY() + 60 - ballRadius;
+					posY = p.getPosY() + 60 + ballRadius;
 				}
 			}else {
 				if (posX - ballRadius < 0) {

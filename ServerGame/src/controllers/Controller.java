@@ -41,6 +41,8 @@ public class Controller {
 						sendSeconds();
 					}else {
 						sendInfoEndGame();
+						time.stop();
+						timer.stop();
 					}
 				}
 			}
