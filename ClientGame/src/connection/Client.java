@@ -25,6 +25,7 @@ public class Client extends Thread{
 	private int idClient;
 	private Manager manager;
 	private int seconds;
+	private boolean endGame;
 
 	public Client(String ip, int port, Manager manager) throws IOException {
 		this.manager = manager;
@@ -94,7 +95,14 @@ public class Client extends Thread{
 		}else if(response.equals(Request.SEND_SECONDS.toString())) {
 			seconds = Integer.parseInt(input.readUTF());
 			LOGGER.log(Level.INFO, "Informacion segundos recibida");
+		}else if(response.equals(Request.SEND_END_GAME.toString())) {
+			endGame = true;
+			LOGGER.log(Level.INFO, "Fin del Juego");
 		}
+	}
+
+	public boolean isEndGame() {
+		return endGame;
 	}
 
 	private void sendInfoPlayer() throws IOException {

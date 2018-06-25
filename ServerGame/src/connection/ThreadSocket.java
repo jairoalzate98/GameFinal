@@ -131,4 +131,8 @@ public class ThreadSocket extends Thread{
 		output.writeUTF(Request.SEND_SECONDS.toString());
 		output.writeUTF(String.valueOf(seconds));
 	}
+
+	public void sendEndGame() throws IOException {
+		output.writeUTF(Request.SEND_END_GAME.toString());
+	}
 }

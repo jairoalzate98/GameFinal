@@ -36,12 +36,24 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (server.isInitGame()) {
-					seconds--;
-					sendSeconds();
+					if (seconds > 0) {
+						seconds--;
+						sendSeconds();
+					}else {
+						sendInfoEndGame();
+					}
 				}
 			}
 		});
 		time.start();
+	}
+
+	public void sendInfoEndGame() {
+		try {
+			server.sendEndGame();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void sendSeconds() {

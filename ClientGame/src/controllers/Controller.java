@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import connection.Client;
+import models.Goal;
 import models.Manager;
 import models.Player;
 import views.MainWindow;
@@ -30,18 +32,46 @@ public class Controller implements ActionListener, KeyListener{
 		timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				verifyGame();
-				mainWindow.setPlayers(manager.getPlayerList());
-				mainWindow.setBall(manager.getBall());
-				mainWindow.setSeconds(client.getSeconds());
-				mainWindow.revalidate();
-				mainWindow.repaint();
+				if (!client.isEndGame()) {
+					verifyGame();
+					mainWindow.setPlayers(manager.getPlayerList());
+					mainWindow.setBall(manager.getBall());
+					mainWindow.setSeconds(client.getSeconds());
+					mainWindow.revalidate();
+					mainWindow.repaint();
+				}else {
+					boolean t = verifyVictory();
+					mainWindow.setWin(t);
+					mainWindow.setVisible(false);
+					mainWindow.setVisibleDialogEndGame();
+					timer.stop();
+				}
 			}
 		});
 		timer.setRepeats(true);
 		timer.start();
 	}
 	
+	public boolean verifyVictory() {
+		boolean t = false;
+		ArrayList<Goal> goals = manager.getGoalList();
+		String id = "";
+		int min = goals.get(0).getGoals();
+		for (Goal goal : goals) {
+			if (goal.getGoals() < min) {
+				min = goal.getGoals();
+				id += goal.getIdClient() + ",";
+			}
+		}
+		String[] ids = id.split(",");
+		for (String string : ids) {
+			if (Integer.parseInt(string) == client.getIdClient()) {
+				t = true;
+			}
+		}
+		return t;
+	}
+
 	private void verifyGame() {
 		if (client.isGame()) {
 			mainWindow.setInvisibleDialogWait();

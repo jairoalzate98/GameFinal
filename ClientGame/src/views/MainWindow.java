@@ -18,6 +18,7 @@ public class MainWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JDialogWaitInitGame jDialogWaitInitGame;
 	private JPanelGame jPanelGame;
+	private JDialogEndGame dialogEndGame;
 
 	public MainWindow(Controller controller) {
 		setTitle(TITLE_GAME);
@@ -28,9 +29,14 @@ public class MainWindow extends JFrame{
 		setIconImage(new ImageIcon(getClass().getResource("/img/icon.png")).getImage());
 		jDialogWaitInitGame = new JDialogWaitInitGame(this);
 		jDialogWaitInitGame.setVisible(true);
+		dialogEndGame = new JDialogEndGame(this);
 		jPanelGame = new JPanelGame(controller);
 		jPanelGame.setFocusable(true);
 		add(jPanelGame, BorderLayout.CENTER);
+	}
+	
+	public void setWin(boolean t) {
+		dialogEndGame.setWin(t);
 	}
 	
 	public void setGoals(ArrayList<Goal> goalList) {
@@ -53,5 +59,9 @@ public class MainWindow extends JFrame{
 	
 	public void setSeconds(int seconds) {
 		jPanelGame.setSeconds(seconds);
+	}
+
+	public void setVisibleDialogEndGame() {
+		dialogEndGame.setVisible(true);
 	}
 }

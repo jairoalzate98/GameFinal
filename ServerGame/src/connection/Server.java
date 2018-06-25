@@ -148,4 +148,10 @@ public class Server extends Thread{
 			ts.sendSeconds(seconds);
 		}
 	}
+
+	public void sendEndGame() throws IOException {
+		for (ThreadSocket ts : connections) {
+			ts.sendEndGame();
+		}
+	}
 }
