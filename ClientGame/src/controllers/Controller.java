@@ -59,7 +59,10 @@ public class Controller implements ActionListener, KeyListener{
 		int min = goals.get(0).getGoals();
 		for (Goal goal : goals) {
 			if (goal.getGoals() < min) {
+				id = "";
 				min = goal.getGoals();
+				id += goal.getIdClient() + ",";
+			}else if(goal.getGoals() == min) {
 				id += goal.getIdClient() + ",";
 			}
 		}
